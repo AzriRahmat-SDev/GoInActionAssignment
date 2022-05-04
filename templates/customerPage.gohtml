@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WELCOME PAGE</title>
+    <title>Doctor Booking</title>
 </head>
 <body>
 {{if .First}}
@@ -12,10 +12,10 @@ Welcome to the application {{.Username}}<br>
 Your first name is {{.First}}<br>
 Your last name is {{.Last}}<br>
 <br>
-<h3><a href="/restricted">Book An Appointment</a></h3>
-<h3><a href="/Search">Search Available Appointments</a></h3>
-<h3><a href="/EditCustomerAppts">Edit Appointment Details</a></h3>
-<h3><a href="/EditProfile">Edit Current Profile</a></h3>
+<h3><a href="/booking">Book An Appointment</a></h3>
+<h3><a href="/search">Search Available Appointments</a></h3>
+<h3><a href="/editcustomerappts">Edit Appointment Details</a></h3>
+<h3><a href="/editProfile">Edit Current Profile</a></h3>
 <h3><a href="/logout">Log Out</a></h3>
 {{else}}
 <h2>You are currently either not logged in or need to sign up for an account</h2>
