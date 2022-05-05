@@ -1,9 +1,62 @@
 package main
 
-import "net/http"
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"strconv"
+)
 
 func homePage(w http.ResponseWriter, r *http.Request) {
+	data := make(map[string]interface{})
+	data["doctors"] = doctorList
 
+	user := getUser(r)
+	if user != nil {
+		data["user"] = user
+
+		if r.Method == http.MethodPost {
+			r.ParseForm()
+			doctorId, err := strconv.Atoi(r.PostFormValue("doctorId"))
+			if err != nil {
+				log.Println("Home: ", err)
+			}
+
+			date := r.PostFormValue(fmt.Sprintf("date%d", doctorId))
+			if !bookingIsAvail(doctorId, date) {
+				form := New(r.Form)
+				form.Errors.Add("date", fmt.Sprintf("Date selected for \"%s\" has already been booked! Please select another date", getDoctorById(doctorId).name))
+				if err := Template(w, r, "/home.gohtml", &TemplateData{Data: data, Form: form}); err != nil {
+					log.Print("Home: ", err)
+				}
+				return
+			}
+
+			newBookings := booking{
+				customerId: user.customerId,
+				doctorId:   doctorId,
+				date:       date,
+			}
+			bookingId := newBooking(newBookings)
+			user.bookingId = append(user.bookingId, bookingId)
+			form := New(r.Form)
+			form.Errors.Add("success", fmt.Sprintf("Booking for \"%s\" on \"%s\" successful!", getDoctorById(doctorId).name, date))
+
+			if err := Template(w, r, "/home.gohtml", &TemplateData{Data: data, Form: New(nil)}); err != nil {
+				log.Println("Home: ", err)
+			}
+			return
+		}
+
+	} else {
+		if err := Template(w, r, "home.page.html",
+			&TemplateData{
+				Data: data,
+				Form: New(nil)}); err != nil {
+			log.Println("Home: ", err)
+
+		}
+	}
 }
 
 func getUser(r *http.Request) (user *User) {
