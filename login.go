@@ -37,7 +37,7 @@ func logIn(w http.ResponseWriter, r *http.Request) {
 		if !form.Valid() {
 			data := make(map[string]interface{})
 			data["login"] = user
-			if err := Template(w, r, "/login.gohtml", &TemplateData{
+			if err := Template(w, r, "/login.page.html", &TemplateData{
 				Data: data,
 				Form: form,
 			}); err != nil {
@@ -64,6 +64,7 @@ func logIn(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, "/admin", http.StatusSeeOther)
 			return
 		}
+		//if the username and password i correct it will exe to the home page
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
