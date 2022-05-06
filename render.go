@@ -16,7 +16,6 @@ type TemplateData struct {
 func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *TemplateData) error {
 
 	ts, err := template.ParseFiles(fmt.Sprintf("./templates/%s", tmpl), "./templates/base.layout.html", "./templates/header.layout.html")
-
 	fmt.Println(ts)
 	fmt.Println(tmpl)
 	if err != nil {

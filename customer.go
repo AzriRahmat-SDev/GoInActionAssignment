@@ -35,7 +35,7 @@ func initCustomers() {
 			Password: []byte("1234"),
 			isAdmin:  true,
 		}, {
-			userName:  "john",
+			userName:  "user",
 			firstName: "John",
 			lastName:  "Deo",
 			Password:  []byte("1234"),

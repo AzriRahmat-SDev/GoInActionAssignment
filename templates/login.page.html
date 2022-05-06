@@ -1,7 +1,7 @@
 {{template "base" .}}
 
 <div>
-	{{$res := index .Data "login"}}
+	{{$res := index .Data "logIn"}}
 
 	<form method="POST">
 		{{with .Form.Errors.Get "username"}}
@@ -22,9 +22,13 @@
 		{{end}}
 		<div>
 			<label for="password">password</label><br />
-			<input type="password" {{with .Form.Errors.Get "password"}} is-invalid
-			{{end}} id="password" name="password" autocomplete="off"
-			placeholder="Password" />
+			<input
+				type="password"
+				id="password"
+				name="password"
+				autocomplete="off"
+				placeholder="Password"
+			/>
 		</div>
 		<button type="submit">Sign in</button>
 	</form>
