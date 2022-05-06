@@ -45,7 +45,7 @@ func newBooking(value booking) int {
 }
 
 func (b *booking) getDoctor() string {
-	return getDoctorById(b.bookingId).name
+	return getDoctorById(b.bookingId).Name
 }
 
 func deleteBookingFromBookingList(id int) error {

@@ -25,8 +25,8 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 			date := r.PostFormValue(fmt.Sprintf("date%d", doctorId))
 			if !bookingIsAvail(doctorId, date) {
 				form := New(r.Form)
-				form.Errors.Add("date", fmt.Sprintf("Date selected for \"%s\" has already been booked! Please select another date", getDoctorById(doctorId).name))
-				if err := Template(w, r, "/home.gohtml", &TemplateData{Data: data, Form: form}); err != nil {
+				form.Errors.Add("date", fmt.Sprintf("Date selected for \"%s\" has already been booked! Please select another date", getDoctorById(doctorId).Name))
+				if err := Template(w, r, "home.page.html", &TemplateData{Data: data, Form: form}); err != nil {
 					log.Print("Home: ", err)
 				}
 				return
@@ -40,14 +40,16 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 			bookingId := newBooking(newBookings)
 			user.bookingId = append(user.bookingId, bookingId)
 			form := New(r.Form)
-			form.Errors.Add("success", fmt.Sprintf("Booking for \"%s\" on \"%s\" successful!", getDoctorById(doctorId).name, date))
+			form.Errors.Add("success", fmt.Sprintf("Booking for \"%s\" on \"%s\" successful!", getDoctorById(doctorId).Name, date))
 
-			if err := Template(w, r, "/home.gohtml", &TemplateData{Data: data, Form: New(nil)}); err != nil {
+			if err := Template(w, r, "home.page.html", &TemplateData{Data: data, Form: form}); err != nil {
 				log.Println("Home: ", err)
 			}
 			return
 		}
-
+		if err := Template(w, r, "home.page.html", &TemplateData{Data: data, Form: New(nil)}); err != nil {
+			log.Println("Home: ", err)
+		}
 	} else {
 		if err := Template(w, r, "home.page.html",
 			&TemplateData{

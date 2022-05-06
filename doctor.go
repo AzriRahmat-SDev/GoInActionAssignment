@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 type doctor struct {
-	id   int
-	name string
+	Id   int
+	Name string
 }
 
 var doctorList []*doctor
@@ -19,8 +19,8 @@ func initDoctors() {
 func incrementDoctor() int {
 	max := 0
 	for _, doctor := range doctorList {
-		if doctor.id > max {
-			max = doctor.id
+		if doctor.Id > max {
+			max = doctor.Id
 		}
 	}
 	return max + 1
@@ -28,7 +28,7 @@ func incrementDoctor() int {
 
 func getDoctorById(id int) *doctor {
 	for _, value := range doctorList {
-		if value.id == id {
+		if value.Id == id {
 			return value
 		}
 	}
@@ -36,13 +36,13 @@ func getDoctorById(id int) *doctor {
 }
 
 func addDoctor(value *doctor) {
-	value.id = incrementDoctor()
+	value.Id = incrementDoctor()
 	doctorList = append(doctorList, value)
 }
 
 func deleteDoctor(id int) error {
 	for i, value := range doctorList {
-		if value.id == id {
+		if value.Id == id {
 			doctorList = append(doctorList[:i], doctorList[i+1:]...)
 			return nil
 		}

@@ -6,13 +6,12 @@
 
 <div class="container">
 	<div class="row">
-		{{$res := index .Data "user"}} {{$value := index .Data "doctor"}} {{range
-		$value}}
+		{{$res := index .Data "user"}} {{$v := index .Data "doctors"}} {{range $v}}
 		<div class="col" novalidate>
 			<div class="card-body">
-				<h5 class="card-title">{{.name}}</h5>
+				<h5 class="card-title">{{.Name}}</h5>
 				<form method="POST">
-					<input type="hidden" name="doctorId" value="{{.id}}" />
+					<input type="hidden" name="doctorId" value="{{.Id}}" />
 					{{if $res.userName}}
 					<input
 						required
