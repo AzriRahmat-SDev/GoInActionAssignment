@@ -19,7 +19,7 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 		newUser := User{
 			firstName: r.FormValue("firstName"),
 			lastName:  r.FormValue("lastName"),
-			userName:  r.FormValue("userName"),
+			Username:  r.FormValue("userName"),
 			Password:  []byte(r.FormValue("password")),
 		}
 		form := New(r.PostForm)

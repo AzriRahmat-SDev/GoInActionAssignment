@@ -12,11 +12,11 @@
 				<h5 class="card-title">{{.Name}}</h5>
 				<form method="POST">
 					<input type="hidden" name="doctorId" value="{{.Id}}" />
-					{{if $res.userName}}
+					{{if $res.Username}}
 					<input
 						required
 						id="date"
-						name="date{{.id}}"
+						name="date{{.Id}}"
 						class="form-control date"
 						placeholder="Date"
 					/>

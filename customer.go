@@ -9,7 +9,7 @@ import (
 
 type User struct {
 	customerId int
-	userName   string
+	Username   string
 	Password   []byte
 	firstName  string
 	lastName   string
@@ -31,11 +31,11 @@ var Sessions = map[string]string{}
 func initCustomers() {
 	list := []*User{
 		{
-			userName: "admin",
+			Username: "admin",
 			Password: []byte("1234"),
 			isAdmin:  true,
 		}, {
-			userName:  "user",
+			Username:  "user",
 			firstName: "John",
 			lastName:  "Deo",
 			Password:  []byte("1234"),
@@ -66,18 +66,18 @@ func CreateNewUser(u *User) error {
 		return fmt.Errorf("CreateNewUser: %w", err)
 	}
 	u.Password = bpassword
-	Users[u.userName] = u
+	Users[u.Username] = u
 	return nil
 
 }
 func initilizeUsers() {
 	list := []*User{
 		{
-			userName: "admin",
+			Username: "admin",
 			Password: []byte("1234"),
 			isAdmin:  true,
 		}, {
-			userName:  "user",
+			Username:  "user",
 			firstName: "John",
 			lastName:  "Doe",
 			Password:  []byte("1234"),
