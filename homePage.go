@@ -33,12 +33,12 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 			}
 
 			newBookings := booking{
-				customerId: user.customerId,
+				customerId: user.CustomerId,
 				doctorId:   doctorId,
 				date:       date,
 			}
 			bookingId := newBooking(newBookings)
-			user.bookingId = append(user.bookingId, bookingId)
+			user.BookingId = append(user.BookingId, bookingId)
 			form := New(r.Form)
 			form.Errors.Add("success", fmt.Sprintf("Booking for \"%s\" on \"%s\" successful!", getDoctorById(doctorId).Name, date))
 

@@ -41,10 +41,7 @@ func (f *Form) Required(fields ...string) {
 }
 
 func (f *Form) Valid() bool {
-	if len(f.Errors) == 0 {
-		return true
-	}
-	return false
+	return len(f.Errors) == 0
 }
 
 func (f *Form) ExistingUser() bool {

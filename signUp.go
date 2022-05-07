@@ -17,9 +17,9 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Method == http.MethodPost {
 		newUser := User{
-			firstName: r.FormValue("firstName"),
-			lastName:  r.FormValue("lastName"),
-			Username:  r.FormValue("userName"),
+			Firstname: r.FormValue("firstname"),
+			Lastname:  r.FormValue("lastname"),
+			Username:  r.FormValue("username"),
 			Password:  []byte(r.FormValue("password")),
 		}
 		form := New(r.PostForm)
@@ -29,7 +29,7 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 			data := make(map[string]interface{})
 			data["register"] = newUser
 
-			if err := Template(w, r, "signup.gohtml", &TemplateData{
+			if err := Template(w, r, "signup.page.html", &TemplateData{
 				Data: data,
 				Form: form,
 			}); err != nil {
@@ -44,7 +44,7 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := Template(w, r, "signUp.gohtml", &TemplateData{
+	if err := Template(w, r, "signup.page.html", &TemplateData{
 		Data: make(map[string]interface{}),
 		Form: New(nil)}); err != nil {
 		log.Println("Registration: ", err)

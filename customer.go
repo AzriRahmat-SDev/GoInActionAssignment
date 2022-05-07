@@ -8,13 +8,13 @@ import (
 )
 
 type User struct {
-	customerId int
+	CustomerId int
 	Username   string
 	Password   []byte
-	firstName  string
-	lastName   string
+	Firstname  string
+	Lastname   string
 	isAdmin    bool
-	bookingId  []int
+	BookingId  []int
 }
 
 var tpl *template.Template
@@ -36,11 +36,11 @@ func initCustomers() {
 			isAdmin:  true,
 		}, {
 			Username:  "user",
-			firstName: "John",
-			lastName:  "Deo",
+			Firstname: "John",
+			Lastname:  "Deo",
 			Password:  []byte("1234"),
 			isAdmin:   false,
-			bookingId: []int{1, 2, 3, 4},
+			BookingId: []int{1, 2, 3, 4},
 		},
 	}
 
@@ -52,14 +52,14 @@ func initCustomers() {
 func CustomerId() int {
 	max := 0
 	for _, value := range Users {
-		if value.customerId > max {
-			max = value.customerId
+		if value.CustomerId > max {
+			max = value.CustomerId
 		}
 	}
 	return max + 1
 }
 func CreateNewUser(u *User) error {
-	u.customerId = CustomerId()
+	u.CustomerId = CustomerId()
 
 	bpassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -78,11 +78,11 @@ func initilizeUsers() {
 			isAdmin:  true,
 		}, {
 			Username:  "user",
-			firstName: "John",
-			lastName:  "Doe",
+			Firstname: "John",
+			Lastname:  "Doe",
 			Password:  []byte("1234"),
 			isAdmin:   false,
-			bookingId: []int{1, 2, 3, 4, 5},
+			BookingId: []int{1, 2, 3, 4, 5},
 		},
 	}
 
