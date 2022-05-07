@@ -21,13 +21,6 @@ var tpl *template.Template
 var Users = map[string]*User{}
 var Sessions = map[string]string{}
 
-// func initCustomer() {
-// 	// tpl = template.Must(template.ParseGlob("templates/*"))
-// 	// bPassword, _ := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.MinCost)
-// 	// mapAdmin["admin"] = user{"admin", bPassword, "admin", "admin"}
-// 	// mapCustomer["azri"] = userCustomer{"azri", bPassword, "Azri", "rahmat"}
-// }
-
 func initCustomers() {
 	list := []*User{
 		{
@@ -82,11 +75,22 @@ func initilizeUsers() {
 			Lastname:  "Doe",
 			Password:  []byte("1234"),
 			isAdmin:   false,
-			BookingId: []int{1, 2, 3, 4, 5},
+			BookingId: []int{1, 2, 3},
 		},
 	}
 
 	for _, u := range list {
 		CreateNewUser(u)
 	}
+}
+
+func (u *User) cancelBookings(id int) error {
+
+	for result, value := range u.BookingId {
+		if value == id {
+			u.BookingId = append(u.BookingId[:result], u.BookingId[result+1:]...)
+			return nil
+		}
+	}
+	return fmt.Errorf("booking ID was not found")
 }

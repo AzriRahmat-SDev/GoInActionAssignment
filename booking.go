@@ -1,24 +1,21 @@
 package main
 
-type booking struct {
-	bookingId  int
-	customerId int
-	doctorId   int
-	date       string
+type Booking struct {
+	DoctorId   int
+	CustomerId int
+	BookingId  int
+	Date       string
 }
 
-var bookingList map[int]booking
+var BookingList map[int]Booking
 var bookingId int
 
 func init() {
-	bookingList = make(map[int]booking)
-	list := []booking{
+	BookingList = make(map[int]Booking)
+	list := []Booking{
 		{1, 1, 1, "2022-06-06"},
 		{2, 1, 1, "2022-11-07"},
 		{3, 1, 1, "2022-08-31"},
-		{3, 1, 1, "2022-10-01"},
-		{1, 1, 1, "2022-05-10"},
-		{2, 1, 1, "2022-07-23"},
 	}
 
 	for _, value := range list {
@@ -28,30 +25,29 @@ func init() {
 }
 
 func bookingIsAvail(doctorId int, date string) bool {
-	for _, value := range bookingList {
-		if value.doctorId == doctorId && value.date == date {
+	for _, value := range BookingList {
+		if value.DoctorId == doctorId && value.Date == date {
 			return false
 		}
 	}
 	return true
 }
 
-func newBooking(value booking) int {
+func newBooking(value Booking) int {
 	bookingId++
-	value.bookingId = bookingId
-	bookingList[bookingId] = value
-
+	value.BookingId = bookingId
+	BookingList[bookingId] = value
 	return bookingId
 }
 
-func (b *booking) getDoctor() string {
-	return getDoctorById(b.bookingId).Name
+func (b *Booking) GetDoctorName() string {
+	return GetDoctorById(b.BookingId).NameOfDoctor
 }
 
 func deleteBookingFromBookingList(id int) error {
-	for result, value := range bookingList {
-		if value.doctorId == id {
-			delete(bookingList, result)
+	for result, value := range BookingList {
+		if value.DoctorId == id {
+			delete(BookingList, result)
 		}
 	}
 	return nil

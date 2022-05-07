@@ -9,7 +9,7 @@
 		{{$res := index .Data "user"}} {{$v := index .Data "doctors"}} {{range $v}}
 		<div class="col" novalidate>
 			<div class="card-body">
-				<h5 class="card-title">{{.Name}}</h5>
+				<h5 class="card-title">{{.NameOfDoctor}}</h5>
 				<form method="POST">
 					<input type="hidden" name="doctorId" value="{{.Id}}" />
 					{{if $res.Username}}
@@ -32,4 +32,18 @@
 		{{end}}
 	</div>
 </div>
+{{end}} {{define "script"}}
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker.min.js"></script>
+<script>
+	const dateNow = Date.now()
+
+	{{range index .Data "doctors"}}
+	var elem = document.querySelector('input[name="date{{.Id}}"]');
+	var datepicker = new Datepicker(elem, {
+	  format:  "yyyy-mm-dd",
+	  minDate: dateNow
+	});
+	{{end}}
+</script>
+
 {{end}}

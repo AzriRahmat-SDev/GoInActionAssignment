@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 type doctor struct {
-	Id   int
-	Name string
+	Id           int
+	NameOfDoctor string
 }
 
 var doctorList []*doctor
@@ -26,7 +26,7 @@ func incrementDoctor() int {
 	return max + 1
 }
 
-func getDoctorById(id int) *doctor {
+func GetDoctorById(id int) *doctor {
 	for _, value := range doctorList {
 		if value.Id == id {
 			return value

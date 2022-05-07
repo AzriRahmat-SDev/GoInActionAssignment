@@ -12,6 +12,7 @@ func routes() http.Handler {
 	mux.HandleFunc("/login", logIn)
 	mux.HandleFunc("/signup", signUp)
 	mux.HandleFunc("/logout", logOutUser)
+	mux.HandleFunc("/bookings", currentBookings)
 	mux.HandleFunc("/", notFound)
 
 	fs := http.FileServer(http.Dir("static"))
