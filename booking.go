@@ -44,7 +44,7 @@ func (b *Booking) GetDoctorName() string {
 	return GetDoctorById(b.BookingId).NameOfDoctor
 }
 
-func deleteBookingFromBookingList(id int) error {
+func DeleteBookingFromBookingList(id int) error {
 	for result, value := range BookingList {
 		if value.DoctorId == id {
 			delete(BookingList, result)

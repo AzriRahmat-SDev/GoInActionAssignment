@@ -40,7 +40,7 @@ func addDoctor(value *doctor) {
 	doctorList = append(doctorList, value)
 }
 
-func deleteDoctor(id int) error {
+func DeleteDoctor(id int) error {
 	for i, value := range doctorList {
 		if value.Id == id {
 			doctorList = append(doctorList[:i], doctorList[i+1:]...)
